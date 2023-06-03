@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+	@apply text-[16px] tracking-wide text-[#EEFF25] transition-colors duration-200 uppercase hover:text-[#eefa6c];
+}
+
+.mobileActive {
+	@apply font-bold text-[16px] tracking-wide text-[#EEFF25] transition-colors duration-200 uppercase hover:text-[#eefa6c];
+}
+
+.default {
+	@apply text-[16px] tracking-wide text-white transition-colors duration-200 hover:text-[#eefa6c] uppercase;
+}
+
+.mobileDefault {
+	@apply font-bold text-[16px] tracking-wide text-black transition-colors duration-200 hover:text-[#eefa6c] uppercase;
+}
+
+.btn-animate {
+	@apply uppercase text-xl transform transition hover:scale-105 duration-300 px-[30px] py-[20px] border-b-[4px] rounded-lg;
+}
+
+.btn-submit {
+	@apply text-white text-xl font-bold bg-[#D1A054B2] py-3 mt-3;
+}
+
+.btn-disabled {
+	@apply text-white text-xl font-bold bg-gray-400 py-3 mt-3;
+}
+
+.btn-nav {
+	@apply text-[#BB8506] py-[8px] px-4 bg-[#E8E8E8] hover:bg-[#111827] rounded-lg border-b-[#BB8506] border-b-[3px] transform transition hover:scale-105 duration-300 text-[16px] font-medium;
+}
