@@ -3,13 +3,16 @@ import img from "../../assets/others/authentication2.png";
 import bgImg from "../../assets/others/authentication.png";
 import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "./../../Providers/AuthProvider";
+import { toast } from "react-hot-toast";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
 	const [showPass, setShowPass] = useState(false);
-	const { createUser } = useContext(AuthContext);
+	const { createUser, updateUserProfile } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const {
 		reset,
@@ -23,16 +26,38 @@ const SignUp = () => {
 		createUser(data.email, data.password).then((res) => {
 			const loggedUser = res.user;
 			console.log(loggedUser);
+			updateUserProfile(data.name, data.url)
+				.then(() => {
+					const saveUser = { name: data.name, email: data.email };
+					fetch("http://localhost:5000/users", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(saveUser),
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							if (data.insertedId) {
+								toast.success("User Created Successfully", {
+									duration: 1000,
+								});
+								navigate("/");
+							}
+						});
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error("Something Went Wrong", {
+						duration: 5000,
+					});
+				});
 		});
 		reset();
 	};
 
-	// const handleReset = () => {
-	// 	 // Call the reset function from useForm hook
-	//   };
-
 	return (
-		<div style={{ backgroundImage: `url(${bgImg})` }} className="py-[180px] px-[175px]">
+		<div style={{ backgroundImage: `url(${bgImg})` }} className="py-[135px] px-[175px]">
 			<Helmet>
 				<title>Bistro | Sign Up</title>
 			</Helmet>
@@ -57,9 +82,7 @@ const SignUp = () => {
 								placeholder="Type here"
 								className="input input-bordered"
 							/>
-							{errors.name && (
-								<span className="text-red-600">This field is required</span>
-							)}
+							{errors.name && <span className="text-red-600">Name is required</span>}
 						</div>
 						<div className="form-control">
 							<label className="label">
@@ -73,7 +96,22 @@ const SignUp = () => {
 								className="input input-bordered"
 							/>
 							{errors.email && (
-								<span className="text-red-600">This field is required</span>
+								<span className="text-red-600">Email is required</span>
+							)}
+						</div>
+						<div className="form-control">
+							<label className="label">
+								<span className="label-text">Photo URL</span>
+							</label>
+							<input
+								name="photo"
+								type="url"
+								{...register("url", { required: true })}
+								placeholder="Type here"
+								className="input input-bordered"
+							/>
+							{errors.url && (
+								<span className="text-red-600">Photo URL is required</span>
 							)}
 						</div>
 						<div className="form-control">
@@ -121,20 +159,7 @@ const SignUp = () => {
 							<span className="underline hover:text-blue-600">Go to log in</span>
 						</p>
 					</Link>
-					<p className="text-center text-xl font-medium text-[#444444] mt-6 mb-4">
-						Or sign in with
-					</p>
-					<div className="flex justify-center gap-14">
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaFacebookF className="h-6 w-6" />
-						</div>
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaGoogle className="h-6 w-6" />
-						</div>
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaGithub className="h-6 w-6" />
-						</div>
-					</div>
+					<SocialLogin />
 				</div>
 			</div>
 		</div>

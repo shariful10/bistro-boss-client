@@ -5,15 +5,19 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-s
 import img from "../../assets/others/authentication2.png";
 import bgImg from "../../assets/others/authentication.png";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
 	// const captchaRef = useRef(null);
 	const [showPass, setShowPass] = useState(false);
 	const [disabled, setDisabled] = useState(true);
-
 	const { signIn } = useContext(AuthContext);
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const from = location.state?.from?.pathname || "/";
 
 	useEffect(() => {
 		loadCaptchaEnginge(6);
@@ -32,6 +36,7 @@ const Login = () => {
 				toast.success("Successfully Login", {
 					duration: 1000,
 				});
+				navigate(from, { replace: true });
 			})
 			.catch((err) => {
 				console.log(err);
@@ -109,19 +114,13 @@ const Login = () => {
 								className="input input-bordered"
 							/>
 							<div className="">
-								<input
-									type="checkbox"
-									name=""
-									id=""
-								/>
+								<input type="checkbox" name="" id="" />
 								<span className="ml-2">Validate Captcha</span>
 							</div>
 						</div>
 						<input
 							disabled={disabled}
-							className={
-								!disabled ? "btn-submit btn-animate" : "btn-disabled btn-animate"
-							}
+							className="btn-submit btn-animate"
 							type="submit"
 							value="Sign In"
 						/>
@@ -134,20 +133,7 @@ const Login = () => {
 							</span>
 						</p>
 					</Link>
-					<p className="text-center text-xl font-medium text-[#444444] mt-6 mb-4">
-						Or sign in with
-					</p>
-					<div className="flex justify-center gap-14">
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaFacebookF className="h-6 w-6" />
-						</div>
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaGoogle className="h-6 w-6" />
-						</div>
-						<div className="border border-[#444444] hover:border-[#D1A054B2] hover:bg-[#D1A054B2] p-[14px] rounded-full">
-							<FaGithub className="h-6 w-6" />
-						</div>
-					</div>
+					<SocialLogin />
 				</div>
 			</div>
 		</div>

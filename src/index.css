@@ -33,3 +33,34 @@
 .btn-nav {
 	@apply text-[#BB8506] py-[8px] px-4 bg-[#E8E8E8] hover:bg-[#111827] rounded-lg border-b-[#BB8506] border-b-[3px] transform transition hover:scale-105 duration-300 text-[16px] font-medium;
 }
+
+.drawer-side a.active {
+	color: white;
+}
+
+.drawer-side a {
+	background-color: transparent;
+}
+
+.btn-pay {
+	@apply text-xl text-white py-[14px] px-[17px] bg-[#D1A054] rounded-lg;
+}
+
+.t-head {
+	@apply bg-[#D1A054] text-[16px] font-inter font-semibold py-7 text-white;
+}
+
+.t-data {
+	@apply text-[16px] text-[#737373] font-inter;
+}
+
+.btn-delt {
+	@apply px-[16px] py-[13px] bg-[#B91C1C] hover:bg-[#eb3d3d] rounded-lg cursor-pointer text-white;
+}
+.btn-role {
+	@apply px-[16px] py-[13px] bg-[#D1A054] hover:bg-[#e5bb7d] rounded-lg cursor-pointer text-white;
+}
+
+.cart-badge {
+	@apply bg-red-500 px-2 py-0 text-[#ffffff] text-[16px] font-bold rounded-full absolute left-5 top-4;
+}

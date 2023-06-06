@@ -4,10 +4,13 @@ import { useState } from "react";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const NavBar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const { user, logOut } = useContext(AuthContext);
+	const [cart] = useCart();
 
 	const handleLogOut = () => {
 		logOut()
@@ -36,10 +39,27 @@ const NavBar = () => {
 			</li>
 			<li>
 				<NavLink
+					to="/secret"
+					className={({ isActive }) => (isActive ? "active" : "default")}>
+					Secret
+				</NavLink>
+			</li>
+			<li>
+				<NavLink
 					to="/dashboard"
 					className={({ isActive }) => (isActive ? "active" : "default")}>
 					Dashboard
 				</NavLink>
+			</li>
+			<li>
+				<Link to="/dashboard/mycart">
+					<div className="flex relative">
+						<div className="p-2 bg-[#006837] rounded-full">
+							<FaShoppingCart className="h-5 w-5 text-white" />
+						</div>
+						<div className="cart-badge">{cart?.length || 0}</div>
+					</div>
+				</Link>
 			</li>
 			<li>
 				<NavLink
@@ -49,9 +69,11 @@ const NavBar = () => {
 				</NavLink>
 			</li>
 			{user ? (
-				<button onClick={handleLogOut} className="btn-nav">
-					Log Out
-				</button>
+				<>
+					<button onClick={handleLogOut} className="btn-nav">
+						Sign out
+					</button>
+				</>
 			) : (
 				<li>
 					<NavLink
@@ -85,6 +107,13 @@ const NavBar = () => {
 					to="/order"
 					className={({ isActive }) => (isActive ? "mobileActive" : "mobileDefault")}>
 					Order Food
+				</NavLink>
+			</li>
+			<li>
+				<NavLink
+					to="/secret"
+					className={({ isActive }) => (isActive ? "active" : "default")}>
+					Secret
 				</NavLink>
 			</li>
 			<li>
