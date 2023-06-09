@@ -12,7 +12,7 @@ const Testimonials = () => {
 	const [reviews, setReviews] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:5000/reviews")
+		fetch("https://bistro-boss-server-flame.vercel.app/reviews")
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
 	}, []);
@@ -24,7 +24,12 @@ const Testimonials = () => {
 				{reviews.map((review) => (
 					<SwiperSlide key={review._id}>
 						<div className="mx-16 flex flex-col items-center justify-center">
-							<Rating className="my-12" style={{ maxWidth: 180 }} value={review.rating} readOnly />
+							<Rating
+								className="my-12"
+								style={{ maxWidth: 180 }}
+								value={review.rating}
+								readOnly
+							/>
 							<FaQuoteLeft className="h-[100px] w-[100px] mb-10" />
 							<p className="text-center mb-2">{review.details}</p>
 							<h3 className="text-[32px] text-[#CD9003] font-medium">

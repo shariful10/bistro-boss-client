@@ -64,3 +64,19 @@
 .cart-badge {
 	@apply bg-red-500 px-2 py-0 text-[#ffffff] text-[16px] font-bold rounded-full absolute left-5 top-4;
 }
+
+.form-title {
+	@apply text-xl text-[#444444] font-inter font-semibold;
+}
+
+.input-placeholder {
+	@apply text-xl text-[#A1A1A1] font-inter font-normal;
+}
+
+.btn-item {
+	@apply text-xl text-white font-inter font-bold bg-gradient-btn py-4 px-[30px] flex gap-2 items-center;
+}
+
+.btn-payment {
+	@apply text-white text-xl font-inter font-bold bg-[#570DF8] hover:bg-blue-700 py-5 px-[188px] rounded-lg;
+}

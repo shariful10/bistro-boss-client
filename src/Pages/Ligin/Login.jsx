@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import img from "../../assets/others/authentication2.png";
 import bgImg from "../../assets/others/authentication.png";
@@ -28,7 +28,7 @@ const Login = () => {
 		const form = e.target;
 		const email = form.email.value;
 		const password = form.password.value;
-		console.log(email, password);
+		// console.log(email, password);
 		signIn(email, password)
 			.then((res) => {
 				const user = res.user;
@@ -119,7 +119,7 @@ const Login = () => {
 							</div>
 						</div>
 						<input
-							disabled={disabled}
+							disabled={false}
 							className="btn-submit btn-animate"
 							type="submit"
 							value="Sign In"

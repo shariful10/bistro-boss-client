@@ -10,6 +10,12 @@ import Secret from "../Pages/Shared/Secret/Secret";
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 
 export const router = createBrowserRouter([
 	{
@@ -55,12 +61,49 @@ export const router = createBrowserRouter([
 		),
 		children: [
 			{
+				path: "userhome",
+				element: <UserHome />,
+			},
+			{
 				path: "mycart",
 				element: <MyCart />,
 			},
 			{
+				path: "payment",
+				element: <Payment />,
+			},
+			// Admin Route
+			{
+				path: "adminhome",
+				element: (
+					<AdminRoute>
+						<AdminHome />
+					</AdminRoute>
+				),
+			},
+			{
 				path: "allusers",
-				element: <AllUsers />,
+				element: (
+					<AdminRoute>
+						<AllUsers />
+					</AdminRoute>
+				),
+			},
+			{
+				path: "addItem",
+				element: (
+					<AdminRoute>
+						<AddItem />
+					</AdminRoute>
+				),
+			},
+			{
+				path: "manageitems",
+				element: (
+					<AdminRoute>
+						<ManageItems />
+					</AdminRoute>
+				),
 			},
 		],
 	},

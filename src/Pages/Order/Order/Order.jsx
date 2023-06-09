@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 const Order = () => {
 	const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
 	const { category } = useParams();
-	const initialIndex = categories.indexOf(category);
+	const initialIndex = categories.indexOf(category.toLowerCase());
 	const [tabIndex, setTabIndex] = useState(initialIndex);
 	const [menu] = useMenu();
 	console.log(category);
@@ -30,11 +30,9 @@ const Order = () => {
 			<div className="max-w-7xl md:mx-auto my-[50px] md:my-[130px] mx-4">
 				<Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
 					<TabList className="text-center">
-						<Tab>SALAD</Tab>
-						<Tab>PIZZA</Tab>
-						<Tab>SOUPS</Tab>
-						<Tab>DESSERTS</Tab>
-						<Tab>DRINKS</Tab>
+						{categories.map((category) => (
+							<Tab key={category.toUpperCase()}>{category.toUpperCase()}</Tab>
+						))}
 					</TabList>
 					<TabPanel>
 						<OrderTab items={salad} />

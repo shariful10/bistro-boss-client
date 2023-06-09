@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 import useCart from "./../../../Hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
 	const [cart, refetch] = useCart();
@@ -19,18 +21,16 @@ const MyCart = () => {
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				fetch(`http://localhost:5000/carts/${item._id}`, {
+				fetch(`https://bistro-boss-server-flame.vercel.app/carts/${item._id}`, {
 					method: "DELETE",
 				})
 					.then((res) => res.json())
 					.then((data) => {
-						console.log('data', data);
-						
+						console.log("data", data);
+
 						if (data.deletedCount > 0) {
 							refetch();
-							Swal.fire("Deleted!", 
-							"Your file has been deleted.", 
-							"success");
+							Swal.fire("Deleted!", "Your file has been deleted.", "success");
 						}
 					});
 			}
@@ -42,13 +42,16 @@ const MyCart = () => {
 			<Helmet>
 				<title>Bistro Boss | My Cart</title>
 			</Helmet>
-			<div className="bg-white p-[50px] shadow-xl px-[210px]">
+			<SectionTitle subHeading={"My Cart"} heading={"WANNA ADD MORE?"} />
+			<div className="bg-white p-[50px] shadow-xl px-[210px] my-50px md:mt-16">
 				<div className="flex justify-between items-center font-bold font-cinzel mt-[50px] mb-8">
 					<h2 className="text-2xl md:text-[32px] uppercase">
 						Total orders: {cart.length}
 					</h2>
 					<h2 className="text-2xl md:text-[32px] uppercase">Total Price: ${total}</h2>
-					<button className="btn-pay">Pay</button>
+					<Link to="/dashboard/payment">
+						<button className="btn-pay">Pay</button>
+					</Link>
 				</div>
 				<div className="overflow-x-auto">
 					<table className="table">
