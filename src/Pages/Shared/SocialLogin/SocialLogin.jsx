@@ -15,7 +15,7 @@ const SocialLogin = () => {
 		googleSignIn().then((res) => {
 			const loggedInUser = res.user;
 			const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email };
-			fetch("https://bistro-boss-server-flame.vercel.app/users", {
+			fetch(`${import.meta.env.VITE_URL}/users`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

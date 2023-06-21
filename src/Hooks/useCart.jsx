@@ -21,7 +21,7 @@ export default useCart;
 
 // const token = localStorage.getItem("access-token");
 // queryFn: async () => {
-// 	const res = await fetch(`https://bistro-boss-server-flame.vercel.app/carts?email=${user?.email}`, {
+// 	const res = await fetch(`${import.meta.env.VITE_URL}/carts?email=${user?.email}`, {
 // 		headers: {
 // 			authorization: `Bearer ${token}`,
 // 		},

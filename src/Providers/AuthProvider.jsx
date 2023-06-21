@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
 			// Get and set the token
 			if (currentUser) {
 				axios
-					.post("https://bistro-boss-server-flame.vercel.app/jwt", {
+					.post(`${import.meta.env.VITE_URL}/jwt`, {
 						email: currentUser.email,
 					})
 					.then((data) => {

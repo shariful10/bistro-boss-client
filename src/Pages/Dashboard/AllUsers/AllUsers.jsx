@@ -13,7 +13,7 @@ const AllUsers = () => {
 	});
 
 	const handleMakeAdmin = (user) => {
-		fetch(`https://bistro-boss-server-flame.vercel.app/users/admin/${user._id}`, {
+		fetch(`${import.meta.env.VITE_URL}/users/admin/${user._id}`, {
 			method: "PATCH",
 		})
 			.then((res) => res.json())
@@ -30,11 +30,11 @@ const AllUsers = () => {
 	const handleDelete = (user) => {};
 
 	return (
-		<div>
+		<div className="my-container">
 			<Helmet>
 				<title>Bistro Boss | All Users</title>
 			</Helmet>
-			<div className="p-[50px] bg-white shadow-2xl">
+			<div className="p-[50px] bg-white shadow-2xl md:mx-[425px] md:my-[130px]">
 				<h2 className="text-2xl md:text-[32px] font-cinzel font-bold mb-4 uppercase">
 					Total Users: {users.length}
 				</h2>

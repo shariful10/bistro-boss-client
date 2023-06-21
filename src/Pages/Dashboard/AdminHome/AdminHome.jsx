@@ -74,7 +74,9 @@ const AdminHome = () => {
 				<div className="bg-gradient-purple rounded-lg flex gap-6 items-center text-white justify-center py-[34px]">
 					<GiWallet className="h-[50px] w-[50px]" />
 					<div className="">
-						<h2 className="text-[40px] font-inter font-extrabold">${stats.revenue}</h2>
+						<h2 className="text-[40px] font-inter font-extrabold">
+							${stats?.revenue?.toFixed(2)}
+						</h2>
 						<h4 className="text-2xl font-inter">Revenue</h4>
 					</div>
 				</div>

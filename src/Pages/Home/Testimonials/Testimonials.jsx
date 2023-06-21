@@ -12,7 +12,7 @@ const Testimonials = () => {
 	const [reviews, setReviews] = useState([]);
 
 	useEffect(() => {
-		fetch("https://bistro-boss-server-flame.vercel.app/reviews")
+		fetch(`${import.meta.env.VITE_URL}/reviews`)
 			.then((res) => res.json())
 			.then((data) => setReviews(data));
 	}, []);
